@@ -2,11 +2,9 @@ import React, { Component } from 'react';
 import './App.css';
 import Shirt from './Shirt';
 import { createStore } from 'redux'
-import cart from '../reducers'
-
 
 class App extends Component {
-  
+
   constructor(){
     super()
 
@@ -16,7 +14,26 @@ class App extends Component {
       }
     };
 
-    let store = createStore(cart,defaultState)
+    const cart = (state = {}, action) => {
+      switch (action.type) {
+        case 'ADD_SHIRT':
+
+          var newState = Object.assign({}, state);
+     
+          newState.cart.items.push({
+            price:action.price,
+            color:action.color,
+            title:action.title,
+          });
+     
+          return newState;
+        default:
+          return state
+      }
+    }
+
+    this.store = createStore(cart,defaultState)
+    this.total = 0;
 
   }
 
@@ -27,7 +44,11 @@ class App extends Component {
         items: state.cart.items
       });
 
-      console.log(state.cart.items)
+      this.total = 0;
+      console.log(state.cart.items);
+      state.cart.items.map((item) =>{
+        this.total += parseFloat(item.price);
+      })
     });
   }
 
@@ -38,6 +59,8 @@ class App extends Component {
         <Shirt store={this.store} title="Shirt 1" price='20' color='blue' />
         <Shirt store={this.store} title="Shirt 2" price='40' color='pink' />
         <Shirt store={this.store} title="Shirt 3" price='35' color='orange'  />
+
+        <h4>Total: {this.total}</h4>
       </div>
     );
   }

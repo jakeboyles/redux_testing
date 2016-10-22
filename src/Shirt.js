@@ -6,13 +6,12 @@ class Shirt extends React.Component {
   constructor(props) {
     super(props);
 
-    var store = this.props.store;
 
     this.state = {
       cart: [],
     };
 
-    this.alertPrice = this.alertPrice.bind(this);
+    this.addShirt = this.addShirt.bind(this);
   };
 
   addShirt(){
@@ -23,9 +22,7 @@ class Shirt extends React.Component {
       title:this.props.title,
     }
 
-    this.store.dispatch(shirt)
-
-    console.log(this.state.cart);
+    this.props.store.dispatch(shirt)
   }
 
   render() {
