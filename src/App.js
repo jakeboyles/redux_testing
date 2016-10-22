@@ -1,6 +1,6 @@
-import React, { Component } from 'react';
-import './App.css';
-import Shirt from './Shirt';
+import React, { Component } from 'react'
+import './App.css'
+import Shirt from './Shirt'
 import { createStore } from 'redux'
 
 
@@ -13,19 +13,20 @@ class App extends Component {
       cart: {
         items: []
       }
-    };
+    }
 
-    const cart = (state = {}, action) => {
+    // Reducer
+    const reducer = (state = {}, action) => {
       switch (action.type) {
         case 'ADD_SHIRT':
 
-          var newState = {...state};
+          var newState = {...state}
      
           newState.cart.items.push({
             price:action.price,
             color:action.color,
             title:action.title,
-          });
+          })
      
           return newState;
 
@@ -34,16 +35,16 @@ class App extends Component {
       }
     }
 
-    this.store = createStore(cart,defaultState)
-    this.total = 0;
-    this.items = [];
+    this.store = createStore(reducer,defaultState)
+    this.total = 0
+    this.items = []
 
   }
 
   componentWillMount() {
     this.store.subscribe(() => {
 
-      var state = this.store.getState();
+      let state = this.store.getState();
 
       this.setState({
         items: state.cart.items
@@ -67,9 +68,11 @@ class App extends Component {
         <Shirt store={this.store} title="Shirt 3" price='35' color='orange'  />
 
         {this.items.map((item, index) =>
-          <h5 key={index}>{item.title}</h5>
+          <h5 key={index}>{item.title}:{item.color}</h5>
         )}
-        <h4>Total: {this.total}</h4>
+
+        <h4>Total: ${this.total}</h4>
+
       </div>
     );
   }
