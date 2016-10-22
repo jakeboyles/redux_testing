@@ -71,6 +71,8 @@ class App extends Component {
         <Shirt store={this.store} title="Shirt 2" price='40' color='pink' />
         <Shirt store={this.store} title="Shirt 3" price='35' color='orange'  />
 
+        {/* Could put this in a seperate cart component  */}
+
         {this.items.map((item, index) =>
           <h5 key={index}>{item.title}:{item.color}</h5>
         )}
