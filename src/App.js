@@ -3,6 +3,7 @@ import Shirt from './Shirt'
 import { createStore } from 'redux'
 import './App.css'
 import _ from 'lodash'
+import reducer from '../reducers'
 
 class App extends Component {
 
@@ -10,35 +11,6 @@ class App extends Component {
     super()
 
     this.state = { cart: { items: [] } };
-
-    // Reducer
-    const reducer = (state = {}, action) => {
-      let newState = {...state}
-      switch (action.type) {
-        case 'ADD_SHIRT':
-          newState.cart.items.push({
-            price:action.price,
-            color:action.color,
-            title:action.title
-          })
-
-          return newState;
-
-        case 'DELETE_SHIRT':
-
-          let items = newState.cart.items.filter(shirt=>{
-            delete action.type
-            return !_.isEqual(action,shirt)
-          });
-
-          newState.cart.items = items
-     
-          return newState
-
-        default:
-          return state
-      }
-    }
 
     this.store = createStore(reducer,this.state)
     this.total = 0
