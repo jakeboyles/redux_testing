@@ -6,7 +6,6 @@ class Shirt extends React.Component {
   constructor(props) {
     super(props);
 
-
     this.state = {
       cart: [],
     };
@@ -68,8 +67,9 @@ class Shirt extends React.Component {
               </div>
               <div className="carrot"></div>
             </div>
-          </div><div className="icon cart">
-            <i onClick={this.addShirt} className="fa fa-shopping-cart" aria-hidden="true"></i>
+          </div>
+          <div onClick={this.addShirt} className="icon cart">
+            <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </div>
         </div>
       </div>

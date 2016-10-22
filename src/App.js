@@ -3,6 +3,7 @@ import './App.css';
 import Shirt from './Shirt';
 import { createStore } from 'redux'
 
+
 class App extends Component {
 
   constructor(){
@@ -18,7 +19,7 @@ class App extends Component {
       switch (action.type) {
         case 'ADD_SHIRT':
 
-          var newState = Object.assign({}, state);
+          var newState = {...state};
      
           newState.cart.items.push({
             price:action.price,
@@ -27,6 +28,7 @@ class App extends Component {
           });
      
           return newState;
+
         default:
           return state
       }
@@ -34,21 +36,25 @@ class App extends Component {
 
     this.store = createStore(cart,defaultState)
     this.total = 0;
+    this.items = [];
 
   }
 
   componentWillMount() {
     this.store.subscribe(() => {
+
       var state = this.store.getState();
+
       this.setState({
         items: state.cart.items
       });
 
-      this.total = 0;
-      console.log(state.cart.items);
-      state.cart.items.map((item) =>{
-        this.total += parseFloat(item.price);
-      })
+      this.items = state.cart.items
+
+      this.total = this.items.reduce((cv,item) =>{
+        return parseFloat(cv)+parseFloat(item.price);
+      },0)
+
     });
   }
 
@@ -60,6 +66,9 @@ class App extends Component {
         <Shirt store={this.store} title="Shirt 2" price='40' color='pink' />
         <Shirt store={this.store} title="Shirt 3" price='35' color='orange'  />
 
+        {this.items.map((item, index) =>
+          <h5 key={index}>{item.title}</h5>
+        )}
         <h4>Total: {this.total}</h4>
       </div>
     );
