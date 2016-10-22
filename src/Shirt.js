@@ -7,21 +7,38 @@ class Shirt extends React.Component {
     super(props);
 
     this.state = {
-      cart: [],
+      in_cart: false,
+      class:''
     };
 
-    this.addShirt = this.addShirt.bind(this);
-  };
-
-  addShirt(){
-    let shirt = {
-      type: 'ADD_SHIRT',
+    this.shirt = {
       price:this.props.price,
       color:this.props.color,
       title:this.props.title,
     }
 
-    this.props.store.dispatch(shirt)
+    this.addShirt = this.addShirt.bind(this);
+  };
+
+  addShirt(){
+
+    if(this.state.in_cart === false)
+    {
+      this.shirt.type="ADD_SHIRT"
+      this.setState({
+        in_cart: true,
+        class:'active'
+      });
+    }
+    else
+    {
+      this.shirt.type="DELETE_SHIRT"
+      this.setState({
+        in_cart: false,
+        class:''
+      });
+    }
+    this.props.store.dispatch(this.shirt)
   }
 
   render() {
@@ -68,7 +85,7 @@ class Shirt extends React.Component {
               <div className="carrot"></div>
             </div>
           </div>
-          <div onClick={this.addShirt} className="icon cart">
+          <div onClick={this.addShirt} className={this.state.class+' icon cart'}>
             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </div>
         </div>

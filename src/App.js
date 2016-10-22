@@ -1,41 +1,46 @@
 import React, { Component } from 'react'
-import './App.css'
 import Shirt from './Shirt'
 import { createStore } from 'redux'
-
+import './App.css'
+import _ from 'lodash'
 
 class App extends Component {
 
   constructor(){
     super()
 
-    var defaultState = {
-      cart: {
-        items: []
-      }
-    }
+    this.state = { cart: { items: [] } };
 
     // Reducer
     const reducer = (state = {}, action) => {
+      let newState = {...state}
       switch (action.type) {
         case 'ADD_SHIRT':
-
-          var newState = {...state}
-     
           newState.cart.items.push({
             price:action.price,
             color:action.color,
-            title:action.title,
+            title:action.title
           })
-     
+
           return newState;
+
+        case 'DELETE_SHIRT':
+
+          let items = newState.cart.items.filter(shirt=>{
+            delete action.type
+            return !_.isEqual(action,shirt)
+          });
+
+          newState.cart.items = items
+     
+          return newState
 
         default:
           return state
       }
     }
 
-    this.store = createStore(reducer,defaultState)
+    this.store = createStore(reducer,this.state)
     this.total = 0
     this.items = []
 
@@ -58,7 +63,6 @@ class App extends Component {
 
     });
   }
-
 
   render() {
     return (

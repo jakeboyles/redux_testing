@@ -169,6 +169,13 @@ img {
     color: #fefefe;
   }
 
+  .icon.active {
+    background-color: #69addc;
+    color: #fefefe;
+  }
+
+
+
   .icon:last-child {
     border: none;
   }
