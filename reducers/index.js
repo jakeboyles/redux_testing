@@ -1,27 +1,31 @@
-  export default(state = {}, action) => {
-    let newState = {...state}
-    switch (action.type) {
-      case 'ADD_SHIRT':
-        newState.cart.items.push({
-          price:action.price,
-          color:action.color,
-          title:action.title
-        })
+const initialState = {
+    items: []
+};
 
-        return newState;
+export default(state = initialState, action) => {
+  let newState = {...state}
+  switch (action.type) {
+    case 'ADD_SHIRT':
+      newState.cart.items.push({
+        price:action.price,
+        color:action.color,
+        title:action.title
+      })
 
-      case 'DELETE_SHIRT':
+      return newState;
 
-        let items = newState.cart.items.filter(shirt=>{
-          delete action.type
-          return !_.isEqual(action,shirt)
-        });
+    case 'DELETE_SHIRT':
 
-        newState.cart.items = items
-   
-        return newState
+      let items = newState.cart.items.filter(shirt=>{
+        delete action.type
+        return !_.isEqual(action,shirt)
+      });
 
-      default:
-        return state
-    }
+      newState.cart.items = items
+ 
+      return newState
+
+    default:
+      return state
   }
+}

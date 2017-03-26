@@ -1,15 +1,20 @@
 import React from 'react';
+import { connect } from 'react-redux';
+import { deleteShirt,addShirt } from '../actions';
+
 import './App.css';
 
 class Shirt extends React.Component {
 
-  constructor(props) {
+  constructor(props,dispatch) {
     super(props);
 
     this.state = {
       in_cart: false,
       class:''
     };
+
+    this.dispatch = dispatch;
 
     this.shirt = {
       price:this.props.price,
@@ -24,21 +29,21 @@ class Shirt extends React.Component {
 
     if(this.state.in_cart === false)
     {
-      this.shirt.type="ADD_SHIRT"
       this.setState({
         in_cart: true,
         class:'active'
       });
+
+      this.dispatch(addShirt(this.shirt));
     }
     else
     {
-      this.shirt.type="DELETE_SHIRT"
       this.setState({
         in_cart: false,
         class:''
       });
     }
-    this.props.store.dispatch(this.shirt)
+      this.dispatch(deleteShirt(this.shirt));
   }
 
   render() {
@@ -99,4 +104,5 @@ class Shirt extends React.Component {
   };
 }
 
+Shirt = connect()(Shirt);
 export default Shirt;
