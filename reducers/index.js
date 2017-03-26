@@ -13,9 +13,18 @@ export default(state = initialState, action) => {
           title:action.title
         })
       }
+    case 'DELETE_SHIRT':
+
+      let newItems = state.items.filter(shirt=>{
+        delete action.type
+        return !_.isEqual(action,shirt)
+      });
+
+      return {
+        ...state,
+        items:newItems
+      }
     default:
       return state
   }
-
-
 }

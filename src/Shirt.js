@@ -26,7 +26,14 @@ class Shirt extends React.Component {
   };
 
   addShirt(){
-      this.dispatch(addShirtNew(this.shirt));
+      if(this.state.in_cart===false)
+      {
+        this.dispatch(addShirtNew(this.shirt));
+        this.state.in_cart = true;
+      } else{
+        this.dispatch(deleteShirt(this.shirt));
+        this.state.in_cart = false;
+      }
   }
 
   render() {
