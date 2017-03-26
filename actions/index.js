@@ -3,7 +3,7 @@ export const deleteShirt = (shirt) =>({
 	...shirt
 })
 
-export const addShirt = (shirt) =>({
+export const addShirtNew = (shirt) =>({
 	type: 'ADD_SHIRT',
 	...shirt
 })

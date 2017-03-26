@@ -8,6 +8,7 @@ import { connect } from 'react-redux';
 
 
 let App = ({ items }) => {
+  console.log(items);
     return (
       <div className='container'>
         <Shirt title="Shirt 1" price='20' color='blue' />

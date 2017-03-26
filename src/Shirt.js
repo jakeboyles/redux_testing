@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteShirt,addShirt } from '../actions';
+import { deleteShirt,addShirtNew } from '../actions';
 
 import './App.css';
 
@@ -26,24 +26,7 @@ class Shirt extends React.Component {
   };
 
   addShirt(){
-
-    if(this.state.in_cart === false)
-    {
-      this.setState({
-        in_cart: true,
-        class:'active'
-      });
-
-      this.dispatch(addShirt(this.shirt));
-    }
-    else
-    {
-      this.setState({
-        in_cart: false,
-        class:''
-      });
-    }
-      this.dispatch(deleteShirt(this.shirt));
+      this.dispatch(addShirtNew(this.shirt));
   }
 
   render() {
