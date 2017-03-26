@@ -6,7 +6,7 @@ export default(state = initialState, action) => {
   let newState = {...state}
   switch (action.type) {
     case 'ADD_SHIRT':
-      newState.cart.items.push({
+      newState.items.push({
         price:action.price,
         color:action.color,
         title:action.title
@@ -16,12 +16,12 @@ export default(state = initialState, action) => {
 
     case 'DELETE_SHIRT':
 
-      let items = newState.cart.items.filter(shirt=>{
+      let items = newState.items.filter(shirt=>{
         delete action.type
         return !_.isEqual(action,shirt)
       });
 
-      newState.cart.items = items
+      newState.items = items
  
       return newState
 
