@@ -6,7 +6,7 @@ import './App.css';
 
 class Shirt extends React.Component {
 
-  constructor(props,dispatch) {
+  constructor(props) {
     super(props);
 
     this.state = {
@@ -14,7 +14,7 @@ class Shirt extends React.Component {
       class:''
     };
 
-    this.dispatch = dispatch;
+    this.dispatch = props.dispatch;
 
     this.shirt = {
       price:this.props.price,

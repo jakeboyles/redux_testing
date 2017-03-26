@@ -10,7 +10,7 @@ const store = createStore(reducer);
 
 ReactDOM.render(
   <Provider store={store}>
-  	<ShirtList />
+  	<ShirtList dispatch={store.dispatch} />
   </Provider>,
   document.getElementById('root')
 );
