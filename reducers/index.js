@@ -10,19 +10,14 @@ export default(state = initialState, action) => {
         items: state.items.concat({
           price:action.price,
           color:action.color,
-          title:action.title
+          title:action.title,
+          id:action.id,
         })
       }
     case 'DELETE_SHIRT':
-
-      let newItems = state.items.filter(shirt=>{
-        delete action.type
-        return !_.isEqual(action,shirt)
-      });
-
       return {
         ...state,
-        items:newItems
+        items:state.items.filter(shirt=> !_.isEqual(action.id,shirt.id)),
       }
     default:
       return state

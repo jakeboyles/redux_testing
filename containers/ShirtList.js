@@ -1,13 +1,9 @@
 import { connect } from 'react-redux';
 import App from '../src/App';
 
-const mapStateToProps = (state) => {
-return {
-    items: state.items
-}}
+const mapStateToProps = (state) => ({ items: state.items })
 
-const mapDispatchToProps = {
-};
+const mapDispatchToProps = {};
 
 const ShirtList = connect(
     mapStateToProps,
