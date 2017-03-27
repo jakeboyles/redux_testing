@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { deleteShirt,addShirtNew } from '../actions';
+import { deleteShirt,addShirtNew } from './actions';
 
 import './App.css';
 
@@ -14,10 +14,10 @@ class Shirt extends React.Component {
       class:''
     };
 
-    this.addShirt = this.addShirt.bind(this);
+    this.shirtAction = this.shirtAction.bind(this);
   };
 
-  addShirt(){
+  shirtAction(){
       if(this.state.in_cart===false)
       {
         this.props.dispatch(addShirtNew(this.props));
@@ -78,7 +78,7 @@ class Shirt extends React.Component {
               <div className="carrot"></div>
             </div>
           </div>
-          <div onClick={this.addShirt} className={this.state.class+' icon cart'}>
+          <div onClick={this.shirtAction} className={this.state.class+' icon cart'}>
             <i className="fa fa-shopping-cart" aria-hidden="true"></i>
           </div>
         </div>
@@ -91,6 +91,14 @@ class Shirt extends React.Component {
     );
   };
 }
+
+
+Shirt.propTypes = {
+    color: React.PropTypes.string.isRequired,
+    title: React.PropTypes.string.isRequired,
+    price: React.PropTypes.number.isRequired,
+    id: React.PropTypes.number.isRequired,
+  }
 
 Shirt = connect()(Shirt);
 export default Shirt;
